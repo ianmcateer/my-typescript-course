@@ -65,3 +65,27 @@ Types are used to analyse our code for errors.
 It allows other engineers to understand what values are flowing around our codebase
 
 ## Examples of Types
+
+```
+const today = new Date()
+```
+
+if however over it will tell you what type that value is pointing to
+
+```
+const today: date
+```
+lets try it with our own plain object
+```
+const person = {
+	age: 20,
+};
+
+```
+if hover over it, we dont get a nice name for the type bc we havent given it a shortened name
+```
+const person: {
+    age: number;
+}
+```
+

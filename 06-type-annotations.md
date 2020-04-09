@@ -38,7 +38,41 @@ let nothing: undefined = undefined;
 let now: Date = new Date();
 
 ```
+## Objects
+
+```
+// type annotation for an array
+// goingto assign an array that contains nothing but strings inside of it
+let colors: string[] = ['red', 'green', 'blue'];
+// saying we are going to have something assigned to colors that is of type
+// array that contains strings
+
+// classes
+class Car {}
+
+let car: Car;
+
+// Object literal
+let point: { x: number; y: number } = {
+	x: 10,
+	y: 20,
+};
+// adding in a type annotation- saying we can only ever assign
+
+```
+
 ## Functions
 
+```
+// Functions
+const logNumber: (i: number) => void = (i: number) => {
+	console.log(i);
+};
+// this syntax is pretty nasty
+// we have provided an annotation- a description of the function
 
-## Objects
+```
+
+## Deleting annotations
+we can delete any of the above annotations and will still work
+

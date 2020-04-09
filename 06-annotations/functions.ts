@@ -1,5 +1,5 @@
 // Functions
-const logNumber: (i: number) => void = (i: number) => {
+const logNumber: (i: number) => void = (i: number): void => {
 	console.log(i);
 };
 // this syntax is pretty nasty

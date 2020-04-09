@@ -54,3 +54,43 @@ const add = (a: number, b: number): number => {
 
 we wrote a funciton add- TS can ensure we are returning the correct type of value but doesnt try to make sre we have the correct type of object, we could subtract but TS doesnt care about that.
 
+we always have to write type annotations for functions (some corner cases though)
+```
+arguments: a:number b: number
+```
+
+```
+// output
+// we do get ebnefit from type inference but we are not going to use it
+```
+why arent we going to use type inference for the output??
+if we remove the type annotaiton from the output
+```
+const add = (a: number, b: number) => {
+	return a + b;
+};
+```
+if we hover over add we see type inference for the return- ts read the body and knew we werre going to return a number
+
+here why we should though..
+```
+const subtract = (a: number. b:number) => {
+  a - b;
+}
+```
+we forgot the return statement. if we hover over it we see type inference return of type void
+
+if we add a type annotation for the return we would get a ts error. this will prevent us from making the mistake
+
+## Anonymous functions
+
+```
+function divide(a: number, b: number): number {
+	return a / b;
+}
+
+const multiply = function (a: number, b: number): number {
+	return a - b;
+};
+
+```

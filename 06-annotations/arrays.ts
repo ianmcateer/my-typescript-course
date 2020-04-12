@@ -9,3 +9,11 @@ const car = carMakers[0];
 
 // prevent incompatible values
 carMakers.push(100);
+
+// we get alot of help with built in functions
+carMakers.map((car: string) => {
+	return car;
+});
+
+// flexible arrays
+const importantDates = [new Date(), '2030-10-10'];

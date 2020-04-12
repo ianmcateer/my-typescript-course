@@ -162,3 +162,10 @@ this encourages us to make generic looking functions and write more re-usable co
 -   we have a printSummary function
 -   Reportable is a gatekepper to 'printSummary'
 -   the objects eg drink and oldCivic must satisfy the Reportable interface to work with 'printSummary'
+
+**General strategy for reusable code in TS**
+
+-   create functions that accept arguments that are typed with interfaces
+-   Objects/classes can decide to 'implement' a given interface to work with a function
+
+every app we build focuses on this mechanic

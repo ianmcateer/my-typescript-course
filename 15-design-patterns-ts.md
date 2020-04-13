@@ -101,3 +101,84 @@ npm install @types/faker
 ```
 
 the warning should be gone now
+
+faker turns into a clickable link of sorts- click and get taken to type defenition file
+
+d.ts is file extension means type defenition file
+
+only goal of this file is desrcibe functions classes that exist inside the library- only see a defenition of the different types that are available
+
+```ts
+declare namespace Faker {
+	interface FakerStatic {
+		locale: string;
+		setLocale(locale: string): void;
+
+		address: {
+			zipCode(format?: string): string;
+			city(format?: number): string;
+			cityPrefix(): string;
+			citySuffix(): string;
+			streetName(): string;
+			streetAddress(useFullAddress?: boolean): string;
+			streetSuffix(): string;
+			streetPrefix(): string;
+			secondaryAddress(): string;
+			county(): string;
+			country(): string;
+			countryCode(): string;
+			state(useAbbr?: boolean): string;
+			stateAbbr(): string;
+			latitude(): string;
+			longitude(): string;
+		};
+```
+
+```ts
+import faker from 'faker';
+
+class User {
+	name: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
+	constructor() {
+		this.name = faker.name.firstName();
+		this.location = {
+			lat: faker.address.latitude(),
+			lng: faker.address.longitude(),
+		};
+	}
+}
+```
+
+get an error for long and lat
+
+```
+Type 'string' is not assignable to type 'number'
+```
+
+the type defenition lng and lat are functions that returns strings
+we need to convert them to a number
+
+```ts
+import faker from 'faker';
+
+class User {
+	name: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
+	constructor() {
+		this.name = faker.name.firstName();
+		this.location = {
+			lat: Number.parseFloat(faker.address.latitude()),
+			lng: Number.parseFloat(faker.address.longitude()),
+		};
+	}
+}
+```
+
+## Using Type Defenition Files

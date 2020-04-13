@@ -54,5 +54,50 @@ will do initialisation inside constructor function instead of the same line
 going to use a library called 'faker'
 
 ```
-npm install -g faker
+npm install faker
 ```
+
+add it into the User.ts
+
+```
+import faker from 'faker';
+```
+
+might get error cannot find declaration file for faker
+
+```
+Could not find a declaration file for module 'faker'.
+```
+
+when we writing typescript code we can reference javascript files- but caveat
+TS wants to check your code- it wants to know all the functions you have, alll the types of data flowing around your app
+
+when using js code- not going to have type information attached to it- to fix this ts has idea of type defenition files- an adapter between TS code you write and Js files you work with
+
+a type defenition file tells the ts compiler all the different functions available inside this js library, what type of argument they take and what type of value they return
+
+some packages like axios include a type defeintion file by default
+
+might have to add a type defenition file manually if not included by default for us
+
+if you ever make use of a module and see the warning you need to install the type declaration file
+
+vast majority of these type defenition libraries are available for you already
+
+we reach into a project called defenitaly typed
+
+in general we always install npm module generally named like this
+
+```
+@types/{library name}
+```
+
+```
+@types/faker
+```
+
+```
+npm install @types/faker
+```
+
+the warning should be gone now

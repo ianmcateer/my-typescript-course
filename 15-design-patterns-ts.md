@@ -357,3 +357,85 @@ new google.maps.Map(document.getElementById('map'), {
 	},
 });
 ```
+
+
+
+
+** Hiding Functionality
+
+lets look at total things we can do in our index.ts file 
+our user and company we only have not so many methods and oroerties we created
+what about th einstance of the map we created?
+
+the instance map has alot of methods on it- eg setZoom, setCenter. 
+
+another engineer could look at the cool methods available on map and very easily break our application
+
+as sole developer of applicaiton we havent vetted these methods - maybe if we found out a way to limit other engineers access to these methods would decrease the chances of our application breaking 
+
+maybe we should create a new class called map- our own custom map class- this custom class creates a new instance of a google map and also in that map class can add a method add marker
+
+Map- new class we are going to create- inside it will create a google map- that way all those dangerous methods are hidden and wrapped up and hidden behind the fascade - only thing you can do is use our custom map class- more challenging for someone to break things 
+
+## Why Use Private modifiers
+
+custom map wil internally create a googlemap for us- we dont want other engineers to access google map directly
+
+so only thing we can do in index file is 
+1. create a COmpany reference its properties
+2. create a User reference its properties
+3. create a customMap and add a marker to it
+
+create a new file called CustomMap
+we want our CustomMap to be able to work with the Google Map
+
+```ts
+export class CustomMap {
+	// saying that google map is going to be an instance of that class
+	private googleMap: google.maps.Map;
+
+	constructor() {
+		this.googleMap = new google.maps.Map(document.getElementById('map'), {
+			zoom: 1,
+			center: {
+				lat: 0,
+				lng: 0,
+			},
+		});
+	}
+}
+
+```
+remember by default a property in a class has a modifier of public- means anyone otuside can directly access and access different properties and methods on it
+
+we dont want tengineer to access it so want to make it private- so that it is not able to be referenced from outside the class
+
+now in index.ts
+```
+import { CustomMap } from './CustomMap';
+
+const customMap = new CustomMap();
+```
+we cant access the googleMap property now
+
+lets make the id we want to select an argument to the CustomCLass to make it more re-usable
+
+```
+/// <reference types="@types/googlemaps" />
+
+export class CustomMap {
+	// saying that google map is going to be an instance of that class
+	private googleMap: google.maps.Map;
+
+	constructor(elementId: string) {
+		this.googleMap = new google.maps.Map(document.getElementById(elementId), {
+			zoom: 1,
+			center: {
+				lat: 0,
+				lng: 0,
+			},
+		});
+	}
+}
+
+```

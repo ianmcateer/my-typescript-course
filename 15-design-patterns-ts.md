@@ -100,6 +100,8 @@ in general we always install npm module generally named like this
 npm install @types/faker
 ```
 
+## Using Type Defenition Files
+
 the warning should be gone now
 
 faker turns into a clickable link of sorts- click and get taken to type defenition file
@@ -181,4 +183,17 @@ class User {
 }
 ```
 
-## Using Type Defenition Files
+## Export Statemenets in Typescript
+
+```ts
+export class User
+import {User} from './User'
+```
+
+default keyword- we didnt provide the name for the value we are going to export
+
+```
+export default
+```
+
+can name it anything we want

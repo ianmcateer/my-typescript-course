@@ -196,4 +196,164 @@ default keyword- we didnt provide the name for the value we are going to export
 export default
 ```
 
-can name it anything we want
+can name it anything we want when we import it
+in TS we usually dont use these default statemenets, cna get confusing when to use curly braces
+
+community convention in TS world is to never use default exports
+that way never have to worry about whether to use curly braces or not
+
+rule doesnt apply to npm modules
+
+```
+import faker from 'faker';
+
+export class User {
+	name: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
+	constructor() {
+		this.name = faker.name.firstName();
+		this.location = {
+			lat: Number.parseFloat(faker.address.latitude()),
+			lng: Number.parseFloat(faker.address.longitude()),
+		};
+	}
+}
+
+```
+
+```
+import { User } from './User';
+const user = new User();
+
+console.log(user);
+
+```
+
+## Defining a Company
+
+lets do the same for company now
+
+```ts
+import faker from 'faker';
+
+class Company {
+	companyName: string;
+	catchPhrase: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
+	constructor() {
+		this.companyName = faker.company.companyName();
+		this.catchPhrase = faker.company.catchPhrase();
+		this.location = {
+			lat: Number.parseFloat(faker.address.latitude()),
+			lng: Number.parseFloat(faker.address.longitude()),
+		};
+	}
+}
+```
+
+import in index.ts and create a company index
+
+## Get Google Map to Show on Screen
+
+```ts
+import { User } from './User';
+import { Company } from './Company';
+
+const user = new User();
+const company = new Company();
+
+console.log(company);
+```
+
+pre generated api key google developer
+
+```
+AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU
+```
+
+1. generate a google dev project: http://console.developers.google.com
+2. enable google maps suppor tin project
+3. generate api key
+4. add google maps script tage to html file
+5. add to html
+
+```html
+<html>
+	<body>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU"></script>
+		<script src="./src/index.ts"></script>
+	</body>
+</html>
+```
+
+script aded as global variable in project
+inside our console google is available
+the only issue is in the editor when we type out google we get an error
+
+we need to help typescript understand that there will be a global variable inside our porject
+
+```
+cannot find name google
+```
+
+we need to install a type defenition file - to help js understand how a third party library works as well as script tags
+
+go to npm
+
+```
+@types/googlemaps
+```
+
+will tell ts there is a global variable called google
+
+```
+/// <reference types="@types/googlemaps" />
+import { User } from './User';
+import { Company } from './Company';
+
+const user = new User();
+const company = new Company();
+google;
+
+```
+
+we see namespace: google when we hover on it
+
+## exploring type defeniiton Files
+
+add a div
+
+```html
+<html>
+	<body>
+		<div class="map" style="height: 100%;"></div>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNLrJhOMz6idD05pzfn5lhA-TAw-mAZCU"></script>
+		<script src="./src/index.ts"></script>
+	</body>
+</html>
+```
+
+inside index.ts
+
+```ts
+/// <reference types="@types/googlemaps" />
+import { User } from './User';
+import { Company } from './Company';
+
+const user = new User();
+const company = new Company();
+
+new google.maps.Map(document.getElementById('map'), {
+	zoom: 1,
+	center: {
+		lat: 0,
+		lng: 0,
+	},
+});
+```
